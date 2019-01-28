@@ -176,9 +176,9 @@ Review the [Contributing Guidelines](CONTRIBUTING.md).
 * [Contact info](#contact-info)
 * [License](#license)
 
-## Study guide
+## Навчальний план
 
-> Suggested topics to review based on your interview timeline (short, medium, long).
+> Запропоновані теми для ознайомлення базуються на вашому графіку інтерв'ю (короткому, середньому, довгому).
 
 ![Imgur](http://i.imgur.com/OfVllex.png)
 
@@ -200,7 +200,7 @@ Review the [Contributing Guidelines](CONTRIBUTING.md).
 
 * **При короткому відрізку часу** - Вашою ціллю є осягнути **вширину** теми системного проектування.  Практикуйтеся, розв'язуючи **деякі** питання з інтерв'ю.
 * **При середньому відрізку часу** - Вашою ціллю є осягнути **вширину** і **трішки вглибину** теми системного проектування.  Практикуйтеся, розв'язуючи **багато** питань з інтерв'ю.
-* **При довгому відрізку часу** - Вашою ціллю є осягнути **breadth** і **більше вглибину** теми системного проектування.  Практикуйтеся, розв'язуючи **більшість** питань з інтерв'ю.
+* **При довгому відрізку часу** - Вашою ціллю є осягнути **вширину** і **більше вглибину** теми системного проектування.  Практикуйтеся, розв'язуючи **більшість** питань з інтерв'ю.
 
 | | Короткий | Середній | Довгий |
 |---|---|---|---|
@@ -208,9 +208,9 @@ Review the [Contributing Guidelines](CONTRIBUTING.md).
 | Прочитайте кілька статей в [Company engineering blogs](#company-engineering-blogs) компаній, де ви проходите співбесіду | :+1: | :+1: | :+1: |
 | Прочитайте кілька [Real world architectures](#real-world-architectures) | :+1: | :+1: | :+1: |
 | Перегляньте [How to approach a system design interview question](#how-to-approach-a-system-design-interview-question) | :+1: | :+1: | :+1: |
-| Опрацюйте [System design interview questions with solutions](#system-design-interview-questions-with-solutions) | Some | Many | Most |
-| Опрацюйте [Object-oriented design interview questions with solutions](#object-oriented-design-interview-questions-with-solutions) | Some | Many | Most |
-| Перегляньте [Additional system design interview questions](#additional-system-design-interview-questions) | Some | Many | Most |
+| Опрацюйте [System design interview questions with solutions](#system-design-interview-questions-with-solutions) | Кілька | Багато | Майже всі |
+| Опрацюйте [Object-oriented design interview questions with solutions](#object-oriented-design-interview-questions-with-solutions) | Кілька | Багато | Майже всі |
+| Перегляньте [Additional system design interview questions](#additional-system-design-interview-questions) | Кілька | Багато | Майже всі |
 
 ## Як підходити до питань з системного проектування на співбесідах
 
@@ -255,26 +255,26 @@ Review the [Contributing Guidelines](CONTRIBUTING.md).
 
 ### Крок 4: Зробіть архітектуру масштабованою
 
-Identify and address bottlenecks, given the constraints.  For example, do you need the following to address scalability issues?
+Використовуючи обмеження, визначайте та адресуйте слабкі місця.  Чи потрібно наступні пункти, наприклад, виокремити як проблеми масштабування?
 
-* Load balancer
-* Horizontal scaling
-* Caching
-* Database sharding
+* Балансувальник навантаження
+* Горизонтальне масштабування
+* Кешування
+* Щардинг бази даних
 
-Discuss potential solutions and trade-offs.  Everything is a trade-off.  Address bottlenecks using [principles of scalable system design](#index-of-system-design-topics).
+Обговорюйте потенційні рішення та компроміси.  Всі рішення є компромісами.  Адресуйте слабкі місця, використовуючи [principles of scalable system design](#index-of-system-design-topics).
 
-### Back-of-the-envelope calculations
+### Попередні розрахунки
 
-You might be asked to do some estimates by hand.  Refer to the [Appendix](#appendix) for the following resources:
+Вас можуть попросити здійснити деякі грубі розрахунки.  Звертайтесь [Appendix](#appendix) до наступних джерел:
 
 * [Use back of the envelope calculations](http://highscalability.com/blog/2011/1/26/google-pro-tip-use-back-of-the-envelope-calculations-to-choo.html)
 * [Powers of two table](#powers-of-two-table)
 * [Latency numbers every programmer should know](#latency-numbers-every-programmer-should-know)
 
-### Source(s) and further reading
+### Джерело(а) і подальші читання
 
-Check out the following links to get a better idea of what to expect:
+Ознайомтесь з наступними посиланнями, щоб краще знати на що очікувати:
 
 * [How to ace a systems design interview](https://www.palantir.com/2011/10/how-to-rock-a-systems-design-interview/)
 * [The system design interview](http://www.hiredintech.com/system-design)
