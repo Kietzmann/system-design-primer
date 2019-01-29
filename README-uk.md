@@ -260,7 +260,7 @@ Review the [Contributing Guidelines](CONTRIBUTING.md).
 * Балансувальник навантаження(Load balancer)
 * Горизонтальне масштабування(Horizontal scaling)
 * Кешування(Caching)
-* Щардинг бази даних(Database sharding)
+* Шардинг бази даних(Database sharding)
 
 Обговорюйте потенційні рішення та компроміси.  Всі рішення є компромісами.  Вирішуйте слабкі місця, використовуючи [principles of scalable system design](#index-of-system-design-topics).
 
