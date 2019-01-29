@@ -465,29 +465,29 @@ AP is a good choice if the business needs allow for [eventual consistency](#even
 * [A plain english introduction to CAP theorem](http://ksat.me/a-plain-english-introduction-to-cap-theorem/)
 * [CAP FAQ](https://github.com/henryr/cap-faq)
 
-## Consistency patterns
+## Шаблони узгодженості
 
-With multiple copies of the same data, we are faced with options on how to synchronize them so clients have a consistent view of the data.  Recall the definition of consistency from the [CAP theorem](#cap-theorem) - Every read receives the most recent write or an error.
+Ми часто стикаємось з проблемою синхронізації кількох копій одинакових даних таким чином, щоб клієнти мали доступ до узгодженої версії цих даних.  Перефразовуючи визначення узгодженості з [CAP theorem](#cap-theorem) - При кожному зчитуванні клієнт отримує дані з найостаннішого запису або помилку.
 
-### Weak consistency
+### Слабка узгодженість
 
-After a write, reads may or may not see it.  A best effort approach is taken.
+Очевидно, що після виконання операції запису, при зчитуванні ми можемо як побачити так і не побачити останні зміни.  Найкращий підхід буде прийнято.
 
-This approach is seen in systems such as memcached.  Weak consistency works well in real time use cases such as VoIP, video chat, and realtime multiplayer games.  For example, if you are on a phone call and lose reception for a few seconds, when you regain connection you do not hear what was spoken during connection loss.
+Наприклад, його використовують в такій системі, як memcached.  Слабку узгодженість найкраще використовувати в системах реального часу, таких як: VoIP, відеочати та мультиплеєрні онлайн ігри.  Наприклад, якщо ви під час телефонного дзвінку втратили зв'язок на кілька секунд і потім він відновився - ви не почуєте того, що було сказано в той момент.
 
-### Eventual consistency
+### Кінцева узгодженість
 
-After a write, reads will eventually see it (typically within milliseconds).  Data is replicated asynchronously.
+Всі операції зчитування побачать кінцеві зміни після запису(зазвичай протягом кількох мілісекунд).  Реплікація даних буде здійснена асинхронно.
 
-This approach is seen in systems such as DNS and email.  Eventual consistency works well in highly available systems.
+Такий підхід можна побачити в наступних системах: DNS та email.  Кінцеву узгодженість варто застосовувати в високодоступних системах.
 
-### Strong consistency
+### Сильна узгодженість
 
-After a write, reads will see it.  Data is replicated synchronously.
+Всі операції зчитування побачать зміни після запису.  Дані будуть зрепліковані синхронно.
 
-This approach is seen in file systems and RDBMSes.  Strong consistency works well in systems that need transactions.
+Цей підхід використовується в файлових системах та СУБД.  Сильна узгодженість використовується в системах з підтримкою транзакцій.
 
-### Source(s) and further reading
+### Джерело(а) і додаткові матеріали
 
 * [Transactions across data centers](http://snarfed.org/transactions_across_datacenters_io.html)
 
