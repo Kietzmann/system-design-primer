@@ -499,9 +499,9 @@ AP is a good choice if the business needs allow for [eventual consistency](#even
 
 #### Активно-пасивне
 
-With active-passive fail-over, heartbeats are sent between the active and the passive server on standby.  If the heartbeat is interrupted, the passive server takes over the active's IP address and resumes service.
+При активно-пасивному аварійному переключенні сигнали стану(heartbeat) пересиоаються між активним та пасивним сервером в режимі очікування.  Якщо сигнал стану перестає поступати на пасивний сервер - він забирає IP адресу активного сервера і продовжує роботу.
 
-The length of downtime is determined by whether the passive server is already running in 'hot' standby or whether it needs to start up from 'cold' standby.  Only the active server handles traffic.
+Тривалість часу простою визначається тим чи пасивний сервер знаходиться в стані "гарячого" простою або він в "холодному" простої і йому потрібно завантажитись.  Трафік обслуговується лише активним сервером.
 
 Активно-пасивне аварійне переключення може також відноситись до аварійного відновлення типу "ведучий-ведений"(master-slave).
 
@@ -509,7 +509,7 @@ The length of downtime is determined by whether the passive server is already ru
 
 При такому варіанті усі сервери керують трафіком і розподіляють навантаження між собою.
 
-If the servers are public-facing, the DNS would need to know about the public IPs of both servers.  If the servers are internal-facing, application logic would need to know about both servers.
+Якщо сервери є публічними, то DNS повинен знати публічні IP усіх таких серверів.  Якщо сервери використовуються для внутрішньої взаємодії - логіка додатку повинна знати про усі такі сервери.
 
 Активно-пасивне аварійне переключення може також відноситись до аварійного відновлення типу "ведучий-ведучий"(master-master).
 
