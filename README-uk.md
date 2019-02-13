@@ -637,34 +637,34 @@ Load balancers can route traffic based on various metrics, including:
 * [Layer 4](#layer-4-load-balancing)
 * [Layer 7](#layer-7-load-balancing)
 
-### Layer 4 load balancing
+### Балансувальники навантаження 4 мережевого рівня 
 
-Layer 4 load balancers look at info at the [transport layer](#communication) to decide how to distribute requests.  Generally, this involves the source, destination IP addresses, and ports in the header, but not the contents of the packet.  Layer 4 load balancers forward network packets to and from the upstream server, performing [Network Address Translation (NAT)](https://www.nginx.com/resources/glossary/layer-4-load-balancing/).
+Балансувальники навантаження 4 рівня використовують інформацію з [transport layer](#communication) для визначення того як розподіляти запити.  Зазвичай цей процес залучає використання IP адрес відправника та отримувача і портів в заголовку, проте не використовує вміст пакету.  Такі балансувальники навантаження направляють мережеві пакети як до так і від сервера вищого рівня, здійснюючи [Network Address Translation (NAT)](https://www.nginx.com/resources/glossary/layer-4-load-balancing/).
 
-### Layer 7 load balancing
+### Балансувальники навантаження 7 мережевого рівня 
 
-Layer 7 load balancers look at the [application layer](#communication) to decide how to distribute requests.  This can involve contents of the header, message, and cookies.  Layer 7 load balancers terminates network traffic, reads the message, makes a load-balancing decision, then opens a connection to the selected server.  For example, a layer 7 load balancer can direct video traffic to servers that host videos while directing more sensitive user billing traffic to security-hardened servers.
+Балансувальники навантаження 7 мережевого рівня  використовують інформацію з [application layer](#communication) для визначення того як розподіляти запити.  Зазвичай цей процес залучає використання вмісту заголовку, повідомлення та кукі(cookies).  Такі балансувальники навантаження balancers спочатку зупиняють мережевий трафік, потім читають повідомлення і здійснюють рішення щодо балансування навантаження, і після цього відкривають з'єднання до обраного сервера.  Наприклад, балансувальник 7 рівея може направляти відео трафік до серверів котрі host videos while directing more sensitive user billing traffic to security-hardened servers.
 
 At the cost of flexibility, layer 4 load balancing requires less time and computing resources than Layer 7, although the performance impact can be minimal on modern commodity hardware.
 
-### Horizontal scaling
+### Горизонтальне масштабування
 
 Load balancers can also help with horizontal scaling, improving performance and availability.  Scaling out using commodity machines is more cost efficient and results in higher availability than scaling up a single server on more expensive hardware, called **Vertical Scaling**.  It is also easier to hire for talent working on commodity hardware than it is for specialized enterprise systems.
 
-#### Disadvantage(s): horizontal scaling
+#### Недолік(и): горизонтальне масштабування
 
 * Scaling horizontally introduces complexity and involves cloning servers
     * Servers should be stateless: they should not contain any user-related data like sessions or profile pictures
     * Sessions can be stored in a centralized data store such as a [database](#database) (SQL, NoSQL) or a persistent [cache](#cache) (Redis, Memcached)
 * Downstream servers such as caches and databases need to handle more simultaneous connections as upstream servers scale out
 
-### Disadvantage(s): load balancer
+### Недолік(и): балансувальник навантаження
 
 * The load balancer can become a performance bottleneck if it does not have enough resources or if it is not configured properly.
 * Introducing a load balancer to help eliminate single points of failure results in increased complexity.
 * A single load balancer is a single point of failure, configuring multiple load balancers further increases complexity.
 
-### Source(s) and further reading
+### Джерело(а) і додаткові матеріали
 
 * [NGINX architecture](https://www.nginx.com/blog/inside-nginx-how-we-designed-for-performance-scale/)
 * [HAProxy architecture guide](http://www.haproxy.org/download/1.2/doc/architecture.txt)
