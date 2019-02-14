@@ -645,24 +645,24 @@ Load balancers can route traffic based on various metrics, including:
 
 Балансувальники навантаження 7 мережевого рівня  використовують інформацію з [application layer](#communication) для визначення того як розподіляти запити.  Зазвичай цей процес залучає використання вмісту заголовку, повідомлення та кукі(cookies).  Такі балансувальники навантаження balancers спочатку зупиняють мережевий трафік, потім читають повідомлення і здійснюють рішення щодо балансування навантаження, і після цього відкривають з'єднання до обраного сервера.  Наприклад, балансувальник 7 рівея може направляти відео трафік до серверів котрі host videos while directing more sensitive user billing traffic to security-hardened servers.
 
-At the cost of flexibility, layer 4 load balancing requires less time and computing resources than Layer 7, although the performance impact can be minimal on modern commodity hardware.
+За рахунок гнучкості, балансувальники навантажження 4 рівня потребують менше часу і обчислювальних ресурсів, ніж балансувальники 7 рівня, хоча їх вклад в продуктивність може бути мінімальним на сучасному апаратному забезпеченні загального призначення.
 
 ### Горизонтальне масштабування
 
-Load balancers can also help with horizontal scaling, improving performance and availability.  Scaling out using commodity machines is more cost efficient and results in higher availability than scaling up a single server on more expensive hardware, called **Vertical Scaling**.  It is also easier to hire for talent working on commodity hardware than it is for specialized enterprise systems.
+Балансувальники навантаження можуть також допомгти з горизонатльним масштабуванням, покращуючи продуктивність та доступність.  Масштабування шляхом використання апаратного призначення загального користування є більш ефективним з точки зору вартості і в результаті надає більшу доступність ніж масштабування одного сервера на більш дорогому апаратному забезпеченні(**Vertical Scaling**).  Також простіше найняти талановитого працівника, працюючого з апаратним забезпеченням загального призначення, аніж спеціаліста в корпоративних системах.
 
 #### Недолік(и): горизонтальне масштабування
 
-* Scaling horizontally introduces complexity and involves cloning servers
-    * Servers should be stateless: they should not contain any user-related data like sessions or profile pictures
-    * Sessions can be stored in a centralized data store such as a [database](#database) (SQL, NoSQL) or a persistent [cache](#cache) (Redis, Memcached)
-* Downstream servers such as caches and databases need to handle more simultaneous connections as upstream servers scale out
+* Горизонтальне масштабування вводить складність і спричиняє клонування серверів
+    * Сервери не мають зберігати стан: вони не повинні містити будь-які дані, пов'язані з користувачами (наприклад сесії або картинки профіля)
+    * Сесії можуть зберігатись в централізованому сховищі даних, такому як [database](#database) (SQL, NoSQL) або стійкому [cache](#cache) (Redis, Memcached)
+* Сервери нижчого порядку(кеші та бази даних) повинні обробляти тим більше одночасних з'єднань чим більше масштабуються сервери вищого порядку
 
 ### Недолік(и): балансувальник навантаження
 
-* The load balancer can become a performance bottleneck if it does not have enough resources or if it is not configured properly.
-* Introducing a load balancer to help eliminate single points of failure results in increased complexity.
-* A single load balancer is a single point of failure, configuring multiple load balancers further increases complexity.
+* Балансувальник навантаження може стати слабким місцем з точки зору продуктивності якщо він не має достатньо ресурсів або зконфігурований неправильно.
+* Впровадження балансувальника навантаження задля ліквідації одиничних точок падіння системи призводить до росту її складності.
+* Один балансувальник навантаження є одиничною точкою падіння, проте впровадження кількох таких балансувальників підвищує складність системи.
 
 ### Джерело(а) і додаткові матеріали
 
