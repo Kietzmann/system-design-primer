@@ -752,7 +752,7 @@ Pull CDN`и добре працюють з високонавантаженим�
 * [Introduction to Zookeeper](http://www.slideshare.net/sauravhaloi/introduction-to-apache-zookeeper)
 * [Here's what you need to know about building microservices](https://cloudncode.wordpress.com/2016/07/22/msa-getting-started/)
 
-## Database
+## База даних
 
 <p align="center">
   <img src="http://i.imgur.com/Xkm5CXz.png">
@@ -760,20 +760,20 @@ Pull CDN`и добре працюють з високонавантаженим�
   <i><a href=https://www.youtube.com/watch?v=w95murBkYmU>Source: Scaling up to your first 10 million users</a></i>
 </p>
 
-### Relational database management system (RDBMS)
+### Система управління реляційною базою даних (СУБД)
 
-A relational database like SQL is a collection of data items organized in tables.
+Реляційна база даних (як SQL) є колекцією даних організованих в таблиці.
 
-**ACID** is a set of properties of relational database [transactions](https://en.wikipedia.org/wiki/Database_transaction).
+**ACID** - сукупність властивостей [transactions](https://en.wikipedia.org/wiki/Database_transaction) реляційної бази даних.
 
-* **Atomicity** - Each transaction is all or nothing
-* **Consistency** - Any transaction will bring the database from one valid state to another
-* **Isolation** - Executing transactions concurrently has the same results as if the transactions were executed serially
-* **Durability** - Once a transaction has been committed, it will remain so
+* **Атомарність** - Жодна транзакція не буде виконана частково
+* **Узгодженість** - Будь-яка транзакція поміняє один чинний стан бази даних в інший
+* **Ізольованість** - Виконання транзакцій одночасно матиме такий результат, як і за умови, що вони були виконані послідовно
+* **Довговічність** - Як тільки транзакція буде виконана, її стан не поміняється
 
-There are many techniques to scale a relational database: **master-slave replication**, **master-master replication**, **federation**, **sharding**, **denormalization**, and **SQL tuning**.
+Існує багато підходів для масштабування реляційної бази даних: **реплікація "ведучий-ведений" (master-slave)**, **реплікація "ведучий-ведучий" (master-master)**, **федерація**, **шардинг**, **денормалізація**, і **SQL тюнінг**.
 
-#### Master-slave replication
+#### Реплікація "ведучий-ведений" (master-slave)
 
 The master serves reads and writes, replicating writes to one or more slaves, which serve only reads.  Slaves can also replicate to additional slaves in a tree-like fashion.  If the master goes offline, the system can continue to operate in read-only mode until a slave is promoted to a master or a new master is provisioned.
 
@@ -783,7 +783,7 @@ The master serves reads and writes, replicating writes to one or more slaves, wh
   <i><a href=http://www.slideshare.net/jboner/scalability-availability-stability-patterns/>Source: Scalability, availability, stability, patterns</a></i>
 </p>
 
-##### Disadvantage(s): master-slave replication
+##### Недоліки(и): master-slave replication
 
 * Additional logic is needed to promote a slave to a master.
 * See [Disadvantage(s): replication](#disadvantages-replication) for points related to **both** master-slave and master-master.
@@ -805,7 +805,7 @@ Both masters serve reads and writes and coordinate with each other on writes.  I
 * Conflict resolution comes more into play as more write nodes are added and as latency increases.
 * See [Disadvantage(s): replication](#disadvantages-replication) for points related to **both** master-slave and master-master.
 
-##### Disadvantage(s): replication
+##### Недолік(и): реплікація
 
 * There is a potential for loss of data if the master fails before any newly written data can be replicated to other nodes.
 * Writes are replayed to the read replicas.  If there are a lot of writes, the read replicas can get bogged down with replaying writes and can't do as many reads.
@@ -813,7 +813,7 @@ Both masters serve reads and writes and coordinate with each other on writes.  I
 * On some systems, writing to the master can spawn multiple threads to write in parallel, whereas read replicas only support writing sequentially with a single thread.
 * Replication adds more hardware and additional complexity.
 
-##### Source(s) and further reading: replication
+##### Джерело(а) і додаткові матеріали
 
 * [Scalability, availability, stability, patterns](http://www.slideshare.net/jboner/scalability-availability-stability-patterns/)
 * [Multi-master replication](https://en.wikipedia.org/wiki/Multi-master_replication)
