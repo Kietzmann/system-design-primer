@@ -775,7 +775,7 @@ Pull CDN`и добре працюють з високонавантаженим�
 
 #### Реплікація "ведучий-ведений" (master-slave)
 
-The master serves reads and writes, replicating writes to one or more slaves, which serve only reads.  Slaves can also replicate to additional slaves in a tree-like fashion.  If the master goes offline, the system can continue to operate in read-only mode until a slave is promoted to a master or a new master is provisioned.
+Майстер(ведучий) обслуговує операції зчитування та запису, реплікуючи записані дані в один або більше ведених(slave), котрий(і) обслуговують лише операції зчитування.  Ведені також можуть реплікувати дані в додаткові ведені в деревоподібному вигляді.  Якщо ведучий стає недоступний, система може продовжити працювати лише в режимі зчитування, допоки ведений не стане ведучим або не буде наданий новий ведучий.
 
 <p align="center">
   <img src="http://i.imgur.com/C9ioGtn.png">
@@ -783,14 +783,14 @@ The master serves reads and writes, replicating writes to one or more slaves, wh
   <i><a href=http://www.slideshare.net/jboner/scalability-availability-stability-patterns/>Source: Scalability, availability, stability, patterns</a></i>
 </p>
 
-##### Недоліки(и): master-slave replication
+##### Недоліки(и): реплікація "ведучий-ведений" (master-slave)
 
-* Additional logic is needed to promote a slave to a master.
-* See [Disadvantage(s): replication](#disadvantages-replication) for points related to **both** master-slave and master-master.
+* Необхідна додаткова логіка для підвищення веденого до ведучого.
+* Розгляньте [Disadvantage(s): replication](#disadvantages-replication) для ідей, пов'язаних з **обома** підходами.
 
-#### Master-master replication
+#### Реплікація "ведучий-ведучий" (master-master)
 
-Both masters serve reads and writes and coordinate with each other on writes.  If either master goes down, the system can continue to operate with both reads and writes.
+Обидва ведучі обслуговують записування та зчитування і координують один одного при записуванні даних.  Якщо один ведучий вийшов з ладу, система може продовжити функціонувати з підтримкою зчитування та запису даних.
 
 <p align="center">
   <img src="http://i.imgur.com/krAHLGg.png">
@@ -798,12 +798,12 @@ Both masters serve reads and writes and coordinate with each other on writes.  I
   <i><a href=http://www.slideshare.net/jboner/scalability-availability-stability-patterns/>Source: Scalability, availability, stability, patterns</a></i>
 </p>
 
-##### Disadvantage(s): master-master replication
+##### Недолік(s): реплікація "ведучий-ведучий" (master-master)
 
-* You'll need a load balancer or you'll need to make changes to your application logic to determine where to write.
-* Most master-master systems are either loosely consistent (violating ACID) or have increased write latency due to synchronization.
+* Для визначення того, куди записувати дані, вам необхідно змінити логіку вашого додатку або мати балансувальник навантаження.
+* Більшість Most master-master systems are either loosely consistent (violating ACID) or have increased write latency due to synchronization.
 * Conflict resolution comes more into play as more write nodes are added and as latency increases.
-* See [Disadvantage(s): replication](#disadvantages-replication) for points related to **both** master-slave and master-master.
+* Розгляньте [Disadvantage(s): replication](#disadvantages-replication) для ідей, пов'язаних з **обома** підходами.
 
 ##### Недолік(и): реплікація
 
@@ -811,14 +811,14 @@ Both masters serve reads and writes and coordinate with each other on writes.  I
 * Writes are replayed to the read replicas.  If there are a lot of writes, the read replicas can get bogged down with replaying writes and can't do as many reads.
 * The more read slaves, the more you have to replicate, which leads to greater replication lag.
 * On some systems, writing to the master can spawn multiple threads to write in parallel, whereas read replicas only support writing sequentially with a single thread.
-* Replication adds more hardware and additional complexity.
+* Реплікація потребує більше очбислювальних ресурсів і додає складності системі.
 
 ##### Джерело(а) і додаткові матеріали
 
 * [Scalability, availability, stability, patterns](http://www.slideshare.net/jboner/scalability-availability-stability-patterns/)
 * [Multi-master replication](https://en.wikipedia.org/wiki/Multi-master_replication)
 
-#### Federation
+#### Федерація
 
 <p align="center">
   <img src="http://i.imgur.com/U3qV33e.png">
@@ -826,16 +826,16 @@ Both masters serve reads and writes and coordinate with each other on writes.  I
   <i><a href=https://www.youtube.com/watch?v=w95murBkYmU>Source: Scaling up to your first 10 million users</a></i>
 </p>
 
-Federation (or functional partitioning) splits up databases by function.  For example, instead of a single, monolithic database, you could have three databases: **forums**, **users**, and **products**, resulting in less read and write traffic to each database and therefore less replication lag.  Smaller databases result in more data that can fit in memory, which in turn results in more cache hits due to improved cache locality.  With no single central master serializing writes you can write in parallel, increasing throughput.
+Федерація (або функціональне розділення) розділяє бази даних використовуючи за функціоналом.  Наприклад, замість однієї, монолітної бази даних, ви можете мати три бази даних: **форуми**, **користувачі**, та **продукти**, resulting in less read and write traffic to each database and therefore less replication lag.  Smaller databases result in more data that can fit in memory, which in turn results in more cache hits due to improved cache locality.  With no single central master serializing writes you can write in parallel, increasing throughput.
 
-##### Disadvantage(s): federation
+##### Недолік(и): федерація
 
-* Federation is not effective if your schema requires huge functions or tables.
-* You'll need to update your application logic to determine which database to read and write.
-* Joining data from two databases is more complex with a [server link](http://stackoverflow.com/questions/5145637/querying-data-by-joining-two-tables-in-two-database-on-different-servers).
-* Federation adds more hardware and additional complexity.
+* Федерація не є ефективною, якщо схема вашої бази даних вимагає наявності великого функціоналу або таблиць.
+* Вам необхідно оновити логіку вашого додатку для визначення в яку базу писати і з котрої читати.
+* Об'єднання даних з двох баз даних є більш складним, ніж [server link](http://stackoverflow.com/questions/5145637/querying-data-by-joining-two-tables-in-two-database-on-different-servers).
+* Федерація потребує більше очбислювальних ресурсів і додає складності системі.
 
-##### Source(s) and further reading: federation
+##### Джерело(а) і додаткові матеріали
 
 * [Scaling up to your first 10 million users](https://www.youtube.com/watch?v=w95murBkYmU)
 
